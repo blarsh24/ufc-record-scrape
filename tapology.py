@@ -5,14 +5,16 @@ import time
 
 # gets user's input on who to look up
 user_raw = input("Enter a UFC fighter name: ")
-user = user_raw + " tapology"
+tapology = user_raw + " tapology"
+ufc_stats = user_raw + " ufcstats"
 
 # searching google for tapology link of user's input
-search_results = search(user)
+tapology_results = search(tapology)
+ufc_stats_results = search(ufc_stats)
 
 # Extract the first search result URL
-tapology_link = next(search_results, None)
-
+tapology_link = next(tapology_results, None)
+ufc_stats_link = next(ufc_stats_results, None)
 
 
 # scrapes for fighter name on tapology using HTML
@@ -127,23 +129,27 @@ def ufc_result(url):
 u_wins, u_losses, u_draws = map(int, ufc_result(tapology_link))
 
 # get fighter name from tapology URL
-fighter_name = fighter_result(tapology_link)
+tapology_name = fighter_result(tapology_link)
 # get fighter streak from tapology URL
-streak = streak_result(tapology_link)
+tapology_streak = streak_result(tapology_link)
 # get pro MMA record from tapology URL
-pro_record = pro_result(tapology_link)
+tapology_pro_record = pro_result(tapology_link)
 # get ufc record from tapology URL
-ufc_record = ufc_result(tapology_link)
+tapology_ufc_record = ufc_result(tapology_link)
 
 
 # displays fighter stats
-print('-----------------------------------')
-print(f"Fighter Name:", fighter_name, "\n")
-print(f"Streak:", streak)
-print("Pro MMA Record:", pro_record)
-print(f"UFC Record: {u_wins}-{u_losses}-{u_draws}\n")
-if tapology_link:
-    print("Tapology link:", tapology_link)
-else:
-    print("No Tapology link found for the given fighter name.")
-print('-----------------------------------')
+def info(tapology_name, tapology_streak, tapology_pro_record, tapology_ufc_record):
+    print('-----------------------------------')
+    print(f"Fighter Name:", tapology_name, "\n")
+    print(f"Streak:", tapology_streak)
+    print("Pro MMA Record:", tapology_pro_record)
+    print(f"UFC Record: {u_wins}-{u_losses}-{u_draws}\n")
+    if tapology_link:
+        print("Tapology link:", tapology_link)
+    else:
+        print("No Tapology link found for the given fighter name.")
+    print('-----------------------------------')
+
+
+info(tapology_name, tapology_streak, tapology_pro_record, tapology_ufc_record)
